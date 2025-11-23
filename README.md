@@ -101,7 +101,7 @@ setTimeout(() => {
     const naemEl = el.querySelector('.ticket-name');
     if (naemEl) {
       const text = naemEl.textContent.trim();
-      if (text.includes('身障' || text.includes('身心障礙'))) {
+      if (text.includes('身障') || text.includes('身心障礙'))) {
          soldOutCount++;
          el.remove(); // 清除身障區塊
          return;
