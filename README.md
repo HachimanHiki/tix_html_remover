@@ -96,6 +96,16 @@ setTimeout(() => {
     }
   });
 
+  const naemEl = el.querySelector('.ticket-name');
+  if (naemEl) {
+     const text = naemEl.textContent.trim();
+     if (text.includes('身障' || text.includes('身心障礙'))) {
+          soldOutCount++;
+          el.remove(); // 清除身障區塊
+          return;
+      }
+   }
+
   // 如果所有票券都已售完或暫無票券，就跳出 confirm
   if (soldOutCount === ticketUnits.length && ticketUnits.length > 0) {
     const confirmReload = confirm('⚠️ 所有票券已售完，是否重新整理頁面？');
