@@ -111,8 +111,13 @@ setTimeout(() => {
     const confirmReload = confirm('⚠️ 所有票券已售完，是否重新整理頁面？');
     if (confirmReload) {
       location.reload();
+      return;
     }
   }
+
+  // 自動同意相關政策
+  const agreeCheckbox = document.getElementById('person_agree_terms');
+  agreeCheckbox.click();
 }, 500);
 })()
 ```
