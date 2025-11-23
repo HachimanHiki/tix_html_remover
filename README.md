@@ -84,27 +84,47 @@ setTimeout(() => {
   console.log('找到的區塊數：', ticketUnits.length);
 
   let soldOutCount = 0;
+  let isClick = false;
+  const MaxTicketCount = 2;
 
   ticketUnits.forEach(el => {
     const quantityEl = el.querySelector('.ticket-quantity');
     if (quantityEl) {
       const text = quantityEl.textContent.trim();
       if (text.includes('已售完') || text.includes('暫無票券')) {
-        soldOutCount++;
-        el.remove(); // 清除已售完區塊
+         soldOutCount++;
+         el.remove(); // 清除已售完區塊
+         return;
       }
     }
-  });
 
-  const naemEl = el.querySelector('.ticket-name');
-  if (naemEl) {
-     const text = naemEl.textContent.trim();
-     if (text.includes('身障' || text.includes('身心障礙'))) {
-          soldOutCount++;
-          el.remove(); // 清除身障區塊
-          return;
+    const naemEl = el.querySelector('.ticket-name');
+    if (naemEl) {
+      const text = naemEl.textContent.trim();
+      if (text.includes('身障' || text.includes('身心障礙'))) {
+         soldOutCount++;
+         el.remove(); // 清除身障區塊
+         return;
       }
-   }
+    }
+
+    // 對第一個留下來的區塊進行張數點擊
+    if(isClick) {
+      return;
+    }
+    const plusBtn = el.querySelector('.btn-default.plus');
+    if (plusBtn) {
+      for (let i = 0; i < MaxTicketCount; i++) {    
+         if (plusBtn.disabled) {
+            console.log('按鈕已 disabled，停止點擊');
+            break;
+          }
+         plusBtn.click();
+         console.log(`已點擊第 ${i + 1} 次`);
+      }
+    }
+    isClick = true
+  });
 
   // 如果所有票券都已售完或暫無票券，就跳出 confirm
   if (soldOutCount === ticketUnits.length && ticketUnits.length > 0) {
