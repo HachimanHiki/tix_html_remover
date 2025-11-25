@@ -71,6 +71,7 @@ if (nonGreyOnlyCount <= 0) {
 })()
 ```
 ### KKTIX
+註：除了移除不必要的元素外，增加了自動點票以及自動勾選同意隱私權政策按鈕
 ```javascript
 (function () {
     // 移除廣告區塊
@@ -85,7 +86,7 @@ setTimeout(() => {
 
   let soldOutCount = 0;
   let isClick = false;
-  const MaxTicketCount = 2;
+  const MaxTicketCount = 2; // 自動點票張數
 
   ticketUnits.forEach(el => {
     const quantityEl = el.querySelector('.ticket-quantity');
